@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  const BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:5001'
+    : window.location.origin;
+
+
     const categorySelect = document.getElementById("category");
     const taskSelect = document.getElementById("task");
     const statusText = document.getElementById("status");
@@ -52,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let lastStatus = null;  
     
       const poll = () => {
-        fetch(`http://localhost:5001/task_status/${jobId}`)
+        fetch(`${BASE_URL}/task_status/${jobId}`)
           .then(res => res.json())
           .then(data => {
             const currentStatus = data.status;
@@ -119,7 +124,7 @@ scheduledTimeInput.addEventListener('input', () => {
 });
 
 // Fetch available tasks and setup category/task select
-  fetch("http://localhost:5001/list_tasks")
+  fetch(`${BASE_URL}/list_tasks`)
   .then((res) => res.json())
   .then((data) => {
     const availableTasks = data.available_tasks;
@@ -213,7 +218,7 @@ scheduledTimeInput.addEventListener('input', () => {
 
      // --- Local function to actually submit the task ---
      function submitNow() {
-        fetch("http://localhost:5001/run_task", {
+        fetch(`${BASE_URL}/run_task`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
