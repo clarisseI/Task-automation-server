@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Automation Client</title>
+    <link rel="stylesheet" href="static/style.css">
+    
+</head>
+<body>
+    <div class="form-container">
+        <h1>Automated Task Scheduler</h1>
+        <form id="taskForm">
+          <label for="category">Category:</label>
+          <select id="category">
+            <option value="">Select a category</option>
+          </select>
+          <small id="category-error" class="input-error"></small>
+          
+        
+          <label for="task">Task:</label>
+          <select id="task" disabled>
+            <option value="">Select a task</option>
+          </select>
+          <small id="task-error" class="input-error"></small>
+
+          <!-- Add input field for scheduled time -->
+          <label for="scheduled_time">Scheduled Time</label>
+          <input type="datetime-local" id="scheduled_time" min="">
+          <small id="time-error" class="input-error"></small>
+
+          <label for="recurrence">Recurrence:</label>
+          <select id="recurrence">
+            <option value="none">No Recurrence</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+
+          <div class="button-wrapper">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+        
+        <p id="status"></p>
+    </div>
+
+    <div class="floating-bg"></div>
+    <div id="toast"></div>
+   
+
+
+    <script src="static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+{
+    "system":{
+        "mac":{
+            "lockscreen":"osascript -e 'tell application \"System Events\" to keystroke \"q\" using {control down, command down}'",
+            "restart": "sudo shutdown -r now",
+            "shutdown": "sudo shutdown -h now",
+            "sleep": "pmset sleepnow"
+        },
+        "linux":{
+            "lock_screen": "gnome-screensaver-command -l",
+            "restart": "sudo reboot",
+            "shutdown": "sudo shutdown now",
+            "sleep": "systemctl suspend"
+        },
+        "windows":{
+            "lock_screen": "rundll32.exe user32.dll,LockWorkStation",
+            "restart": "shutdown /r /t 0",
+            "shutdown": "shutdown /s /t 0",
+            "sleep": "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
+        }
+    },
+    "maintenance":{
+        "mac":{
+            "delete_recycle_bin": "rm -rf ~/.Trash/*",
+            "clear_cache": "rm -rf ~/Library/Caches/*",
+            "clean_temp_files": "rm -rf /tmp/*"
+        },
+        "linux":{
+            "delete_recycle_bin": "rm -rf ~/.local/share/Trash/*",
+            "clear_cache": "sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches",
+            "clean_temp_files": "sudo rm -rf /tmp/*"
+        },
+        "windows":{
+            "delete_recycle_bin": "PowerShell Clear-RecycleBin -Confirm:$false",
+            "clear_cache": "del /q/f/s %TEMP%\\*",
+            "clean_temp_files": "del /q/f/s C:\\Windows\\Temp\\*"
+        }
+    },
+    "network":{
+        "mac":{
+            "ping_google": "ping -c 4 google.com",
+            "check_internet_speed": "speedtest"
+        },
+        "linux":{
+            "ping_google": "ping -c 4 google.com",
+            "check_internet_speed": "speedtest"
+        },
+        "windows":{
+            "ping_google": "ping -n 4 google.com",
+            "check_internet_speed": "speedtest"
+        }
+    },
+    "applications": {
+        "mac": {
+            "open_chrome_word": "open -a 'Google Chrome' && open -a 'Microsoft Word'",
+            "open_download_folder": "open ~/Downloads",
+            "list_files_home": "ls ~"
+        },
+        "linux": {
+            "open_chrome_word": "nohup google-chrome & nohup libreoffice --writer &",
+            "open_download_folder": "xdg-open ~/Downloads",
+            "list_files_home": "ls ~"
+        },
+        "windows": {
+            "open_chrome_word": "start chrome && start winword",
+            "open_download_folder": "explorer %USERPROFILE%\\Downloads",
+            "list_files_home": "dir %USERPROFILE%"
+        }
+    },
+    "sound": {
+        "mac": {
+          "mute_volume": "osascript -e 'set volume output muted true'",
+          "play_notification_sound": "afplay static/sounds/alarm.wav"
+        },
+        "linux": {
+          "mute_volume": "amixer -D pulse sset Master mute",
+          "play_notification_sound": "paplay static/sounds/alarm.wav"
+        },
+        "windows": {
+          "mute_volume": "nircmd.exe mutesysvolume 1",
+          "play_notification_sound": "powershell -c (New-Object Media.SoundPlayer 'static\\sounds\\alarm.wav').PlaySync();"
+        }
+    },
+    "appearance": {
+        "mac": {
+        "switch_to_dark_mode": "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to true'",
+        "switch_to_light_mode": "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to false'"
+        },
+        "linux": {
+        "switch_to_dark_mode": "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'",
+        "switch_to_light_mode": "gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
+        },
+        "windows": {
+        "switch_to_dark_mode": "powershell Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'AppsUseLightTheme' -Value 0",
+        "switch_to_light_mode": "powershell Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'AppsUseLightTheme' -Value 1"
+        }
+    }
+    
+}
+  
+
+  
