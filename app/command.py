@@ -14,7 +14,7 @@ import json
 import os
 
 # Path to the JSON file storing categorized commands
-COMMAND_FILE = "tasks.json"
+COMMAND_FILE = os.path.join(os.path.dirname(__file__), "tasks.json")
 
 def load_tasks():
     """

@@ -70,15 +70,15 @@
     "sound": {
         "mac": {
           "mute_volume": "osascript -e 'set volume output muted true'",
-          "play_notification_sound": "afplay static/sounds/alarm.wav"
+          "play_notification_sound": "afplay /Users/clara/Desktop/Network/task-automation-server/app/static/sounds/alarm.wav"
         },
         "linux": {
           "mute_volume": "amixer -D pulse sset Master mute",
-          "play_notification_sound": "paplay static/sounds/alarm.wav"
+          "play_notification_sound": "paplay s/Users/clara/Desktop/Network/task-automation-server/app/static/sounds/alarm.wav"
         },
         "windows": {
           "mute_volume": "nircmd.exe mutesysvolume 1",
-          "play_notification_sound": "powershell -c (New-Object Media.SoundPlayer 'static\\sounds\\alarm.wav').PlaySync();"
+          "play_notification_sound": "powershell -c (New-Object Media.SoundPlayer '/Users/clara/Desktop/Network/task-automation-server/app/static/sounds/alarm.wav').PlaySync();"
         }
     },
     "appearance": {
