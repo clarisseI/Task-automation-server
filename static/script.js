@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const BASE_URL =  'http://YOUR_LAPTOP_IP:5001'
+  const BASE_URL =  'http://10.55.60.39:5001'
 
 
     const categorySelect = document.getElementById("category");
