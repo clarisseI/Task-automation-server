@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const BASE_URL =  'https://9b60-192-135-79-83.ngrok-free.app'
+ const BASE_URL = "https://9b60-192-135-79-83.ngrok-free.app"; 
+
 
 
     const categorySelect = document.getElementById("category");
