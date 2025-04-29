@@ -38,7 +38,7 @@ polling_scheduler(scheduler)
 
 # Set base and frontend directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-FRONTEND_DIR = os.path.join(BASE_DIR, 'Frontend')
+FRONTEND_DIR = os.path.join(BASE_DIR, 'docs')
 
 app = Flask(__name__,
             static_folder=os.path.join(FRONTEND_DIR, 'static'),
