@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const BASE_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:5001'
-    : window.location.origin;
+  const BASE_URL =  'http://YOUR_LAPTOP_IP:5001'
 
 
     const categorySelect = document.getElementById("category");
