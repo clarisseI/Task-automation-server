@@ -21,3 +21,11 @@ __pycache__/
 
 # Logs (optional if you generate them)
 *.log
+
+# Ignore Python backend files
+*.py
+__pycache__/
+*.db
+venv/
+tasks.json
+*.json
