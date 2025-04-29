@@ -13,8 +13,9 @@ Provides:
 """
 import time
 import threading
-from datetime import datetime, timedelta
+from datetime import datetime
 import pytz
+import logging
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
@@ -71,6 +72,8 @@ def schedule_task(scheduler, task, os_command, start_time, recurrence="none"):
         now = datetime.now(timezone)
         update_task_status(job_id, "running", last_run=now)
         task_status_cache[job_id] = {"status": "running", "next_time": None}
+        
+        logging.info(f"Running scheduled task: {task} (Job ID: {job_id}) at {now.isoformat()}")
 
         result = execute_command(task, os_command)
 
@@ -84,9 +87,11 @@ def schedule_task(scheduler, task, os_command, start_time, recurrence="none"):
                 new_status = "completed"
             update_task_status(job_id, new_status, last_run=now, next_time=next_run)
             task_status_cache[job_id] = {"status": new_status, "next_time": next_run}
+            logging.info(f"Task '{task}' completed successfully.")
         else:
             update_task_status(job_id, "failed", last_run=now)
             task_status_cache[job_id] = {"status": "failed", "next_time": None}
+            logging.error(f"Task '{task}' failed: {result['error']}")
 
     if recurrence == "none":
         scheduler.add_job(
@@ -125,6 +130,7 @@ def polling_scheduler(scheduler, interval=5):
             for job in scheduler.get_jobs():
                 job_id = job.id
                 next_run = job.next_run_time.astimezone(timezone) if job.next_run_time else None
+                logging.debug(f"Polling active jobs: {len(scheduler.get_jobs())} jobs found at {now.isoformat()}")
 
                 if job_id not in db_tasks:
                     continue  # Skip unknown tasks

@@ -13,8 +13,15 @@ Provides:
 import json
 import os
 
+<<<<<<< HEAD
 # Path to the JSON file storing categorized commands
 COMMAND_FILE = os.path.join(os.path.dirname(__file__), "tasks.json")
+=======
+# Dynamically find tasks.json location
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+COMMAND_FILE = os.path.join(BASE_DIR, "tasks.json")
+
+>>>>>>> 1139baec5ba83810f6e6319ff287f8efc909ea62
 
 def load_tasks():
     """
