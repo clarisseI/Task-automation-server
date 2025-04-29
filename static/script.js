@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const BASE_URL =  'http://10.55.60.39:5001'
+  const BASE_URL =  'https://9b60-192-135-79-83.ngrok-free.app'
 
 
     const categorySelect = document.getElementById("category");
@@ -122,7 +122,7 @@ scheduledTimeInput.addEventListener('input', () => {
 });
 
 // Fetch available tasks and setup category/task select
-  fetch(`http://10.55.60.39:5001/list_tasks`)
+  fetch(`${BASE_URL}/list_tasks`)
   .then((res) => res.json())
   .then((data) => {
     const availableTasks = data.available_tasks;
