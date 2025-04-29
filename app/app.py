@@ -10,13 +10,14 @@ Provides APIs to:
 - Track execution status of scheduled tasks
 """
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, send_from_directory
 from datetime import datetime
 from app.scheduler import start_scheduler, schedule_task, polling_scheduler, task_status_cache
 from app.db import init_db, insert_task, get_all_tasks
 from app.command import load_tasks, get_os_command
 from app.task_executor import get_os_type
 import logging
+import os
 
 
 log = logging.getLogger('werkzeug')
@@ -35,6 +36,14 @@ scheduler = start_scheduler()
 # Launch the polling thread to update job statuses
 polling_scheduler(scheduler)
 
+# Set base and frontend directory
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, 'Frontend')
+
+app = Flask(__name__,
+            static_folder=os.path.join(FRONTEND_DIR, 'static'),
+            static_url_path='/static')
+
 @app.route('/')
 def home():
     """
@@ -43,7 +52,7 @@ def home():
     Returns:
         HTML page
     """
-    return render_template('index.html')
+    return send_from_directory(os.path.join(FRONTEND_DIR, 'templates'), 'index.html')
 
 
 @app.route('/list_tasks', methods=['GET'])
@@ -128,6 +137,8 @@ def run_task():
     Returns:
         JSON object with task scheduling information
     """
+  
+
     data = request.json
     task = data.get('task')
     raw_time = data.get('scheduled_time')
@@ -135,6 +146,8 @@ def run_task():
 
     if not task:
         return jsonify({'error': 'No task provided'}), 400
+    
+    logging.info(f"Scheduling task: {task} | Scheduled time: {raw_time} | Recurrence: {recurrence}")
 
     # Get the current OS and command for that task
     os_type = get_os_type()
