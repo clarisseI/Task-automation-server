@@ -122,7 +122,7 @@ scheduledTimeInput.addEventListener('input', () => {
 });
 
 // Fetch available tasks and setup category/task select
-  fetch(`${BASE_URL}/list_tasks`)
+  fetch(`http://10.55.60.39:5001/list_tasks`)
   .then((res) => res.json())
   .then((data) => {
     const availableTasks = data.available_tasks;
